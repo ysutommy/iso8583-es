@@ -1,2 +1,2 @@
-# ISO8583Lib
-ISO8583协议封装，Java开发
+# ISO8583-sdk
+A ISO8583 protocol sdk with ES6 and TypeScript
