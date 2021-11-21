@@ -11,7 +11,7 @@
   ],
   "type": "module",
   "main": "lib/core/index.js",
-  "types": "lib/core/types",
+  "types": "lib/types/core",
   "files": [
     "lib"
   ],
