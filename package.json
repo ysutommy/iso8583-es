@@ -1,0 +1,37 @@
+{
+	"name": "ISO8583-jssdk",
+	"version": "1.0.0",
+	"author": "ysutommy",
+	"description": "A ISO8583 protocol sdk with ES6 and TypeScript",
+	"keywords": [
+		"typescript",
+		"ISO8583",
+		"银联8583",
+		"8583"
+	],
+	"type": "module",
+	"main": "lib/index.js",
+	"types": "lib/types",
+	"files": [
+		"lib"
+	],
+	"scripts": {
+		"testcore": "node --loader ts-node/esm __test__/core.test.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ysutommy/ISO8583-jssdk.git"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ysutommy/ISO8583-jssdk/issues"
+	},
+	"homepage": "https://github.com/ysutommy/ISO8583-jssdk#readme",
+	"devDependencies": {
+		"eslint": "7.2.0",
+		"eslint-config-airbnb-base": "14.2.1",
+		"eslint-plugin-import": "2.22.1",
+		"ts-node": "^10.4.0",
+		"typescript": "^4.5.2"
+	}
+}

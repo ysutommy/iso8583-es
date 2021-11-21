@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "lib",
+		"sourceMap": false,
+		"target": "es2015",
+		"useDefineForClassFields": false,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"allowJs": false,
+		"strict": true,
+		"noUnusedLocals": true,
+		"experimentalDecorators": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"removeComments": false,
+		"lib": ["esnext", "dom"],
+		"types": ["jest", "node"],
+		"rootDir": ".",
+		"skipLibCheck": true,
+		"declarationDir": "lib/types",
+		"declaration": true
+	},
+	"include": [
+		"./core/*"
+	],
+	"exclude": [
+		"./__test__/*"
+	]
+}
