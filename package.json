@@ -10,13 +10,13 @@
 		"8583"
 	],
 	"type": "module",
-	"main": "lib/index.js",
-	"types": "lib/types",
+	"main": "lib/core/index.js",
+	"types": "lib/core/types",
 	"files": [
 		"lib"
 	],
 	"scripts": {
-		"testcore": "node --loader ts-node/esm __test__/core.test.js"
+		"test": "node --loader ts-node/esm __test__/core.test.js"
 	},
 	"repository": {
 		"type": "git",
