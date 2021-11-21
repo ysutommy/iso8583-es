@@ -1,5 +1,5 @@
 {
-	"name": "ISO8583-jssdk",
+	"name": "iso8583-jssdk",
 	"version": "1.0.0",
 	"author": "ysutommy",
 	"description": "A ISO8583 protocol sdk with ES6 and TypeScript",
