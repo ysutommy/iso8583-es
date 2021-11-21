@@ -1,9 +1,9 @@
-### ISO8583-jssdk
+### iso8583-es
 A ISO8583 protocol sdk with ES6 and TypeScript
 
 ### Usage
 ```js
-npm i --save iso8583-jssdk
+npm i --save iso8583-es
 ```
 ##### 编码
 ```js
