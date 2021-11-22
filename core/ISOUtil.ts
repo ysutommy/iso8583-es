@@ -102,7 +102,7 @@ export default class ISOUtil {
 		for (; i < slen; i++) {
 			const c = getV(s.charCodeAt(i));
 			if (i < len) {
-				if ((i & 1) == 0) {
+				if ((i & 1) === 0) {
 					rs[i >> 1] |= (c << 4);
 				} else {
 					rs[i >> 1] |= c;
@@ -110,7 +110,7 @@ export default class ISOUtil {
 			}
 		}
 		for (; i < rslen; i++) {
-			if ((i & 1) == 0) {
+			if ((i & 1) === 0) {
 				rs[i >> 1] |= 0xF0;
 			} else {
 				rs[i >> 1] |= 0x0F;

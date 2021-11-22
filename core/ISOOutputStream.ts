@@ -103,14 +103,14 @@ export default class ISOOutputStream {
 	 */
 	writeBcdLen_c(dataLen: number, varLen: number): void {
 		const n1 = dataLen % 10;
-		if (varLen == 1) {
+		if (varLen === 1) {
 			this.writeByte(n1);
 		} else {
 			dataLen = Math.floor(dataLen / 10);
 			const n2 = dataLen % 10;
-			if (varLen == 2) {
+			if (varLen === 2) {
 				this.writeByte(n1 | (n2 << 4));
-			} else if (varLen == 3) {
+			} else if (varLen === 3) {
 				dataLen = Math.floor(dataLen / 10);
 				const n3 = dataLen % 10;
 				this.writeByte(n3);

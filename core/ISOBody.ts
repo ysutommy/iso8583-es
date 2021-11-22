@@ -67,13 +67,13 @@ export default class ISOBody {
 
 		iis.read(ms, 0, 8);
 		let is128 = false;
-		if ((ms[0] & (1 << 7)) != 0) {
+		if ((ms[0] & (1 << 7)) !== 0) {
 			iis.read(ms, 8, 8);
 			is128 = true;
 		}
 		const len = is128 ? 128 : 64;
 		for (let i = 1; i < len; i++) {
-			if ((ms[i >>> 3] & (1 << (7 - (i & 7)))) != 0) {
+			if ((ms[i >>> 3] & (1 << (7 - (i & 7)))) !== 0) {
 				try {
 					ds[i] = items[i + 1].decode(iis);
 				} catch (e: any) {
@@ -138,9 +138,9 @@ export default class ISOBody {
 				if (!ISOUtil.isChars(ts)) {
 					ts = "HEX:" + HEX.byte2Hex(ISOUtil.string2byte(ts));
 				}
-				if (index == 2) {
+				if (index === 2) {
 					str += (index + ":" + ts.substring(0, 6) + "******" + ts.substring(ts.length - 4) + "//" + name + "\n");
-				} else if (index == 35 || index == 52 || index == 53 || index == 55) {
+				} else if (index === 35 || index === 52 || index === 53 || index === 55) {
 					str += (index + ":" + ts.substring(0, 2) + "****" + ts.substring(ts.length - 2) + "//" + name + "\n");
 				} else {
 					str += (index + ":" + ts + "//" + name + "\n");

@@ -2,6 +2,7 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"outDir": "lib",
+		"newLine": "lf",
 		"sourceMap": false,
 		"target": "es2015",
 		"useDefineForClassFields": false,
@@ -13,7 +14,7 @@
 		"experimentalDecorators": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
-		"removeComments": false,
+		"removeComments": true,
 		"lib": ["esnext", "dom"],
 		"types": ["jest", "node"],
 		"rootDir": ".",

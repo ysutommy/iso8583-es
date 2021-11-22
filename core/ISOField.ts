@@ -60,7 +60,7 @@ export default class ISOField {
 		}
 
 		this.maxLen = parseInt(s);
-		if (this.type == 'B') {
+		if (this.type === 'B') {
 			this.maxLen /= 8;
 			if (this.compress) {
 				this.maxLen *= 2;
@@ -76,7 +76,7 @@ export default class ISOField {
 	 */
 	encode(s: String, ios: ISOOutputStream): void {
 		const { type, maxLen, compress, varLen, index } = this
-		if (type == 'E') {
+		if (type === 'E') {
 			throw new Error("不支持的类型:" + index);
 		}
 		const slen = s.length;
@@ -88,19 +88,19 @@ export default class ISOField {
 		if (compress) {
 			if (varLen > 0) {
 				ios.writeBcdLen_c(slen, varLen);
-				if (type == 'N') {
+				if (type === 'N') {
 					ios.writeBCD_c(s);
 				} else {
 					ios.writeASCII(s);
 				}
 			} else {
-				if (type == 'N') {
+				if (type === 'N') {
 					// 压缩成BCD
 					if (need > 0) {
 						s = ISOField.ZS.substring(0, need) + s;
 					}
 					ios.writeBCD_c(s);
-				} else if (type == 'B') {
+				} else if (type === 'B') {
 					if (need != 0) {
 						throw new Error(index + "域长度异常");
 					}
@@ -117,12 +117,12 @@ export default class ISOField {
 				ios.writeBcdLen(slen, varLen);
 				ios.writeASCII(s);
 			} else {
-				if (type == 'N') {
+				if (type === 'N') {
 					if (need > 0) {
 						s = ISOField.ZS.substring(0, need) + s;
 					}
 					ios.writeASCII(s);
-				} else if (type == 'B') {
+				} else if (type === 'B') {
 					if (need != 0) {
 						throw new Error(index + "域长度异常");
 					}
@@ -144,7 +144,7 @@ export default class ISOField {
 	 */
 	decode(iis: ISOInputStream): String {
 		const { type, compress, varLen, maxLen, index } = this
-		if (type == 'E') {
+		if (type === 'E') {
 			throw new Error("不支持的类型: " + index);
 		}
 
@@ -154,15 +154,15 @@ export default class ISOField {
 				if (len > maxLen) {
 					throw new Error(index + "域长度太长: " + len + ">" + maxLen);
 				}
-				if (type == 'N') {
+				if (type === 'N') {
 					return iis.readBCD_c(len);
 				} else {
 					return iis.readASCII(len);
 				}
 			} else {
-				if (type == 'N') {
+				if (type === 'N') {
 					return iis.readBCD_c(maxLen);
-				} else if (type == 'B') {
+				} else if (type === 'B') {
 					return iis.readBCD_c(maxLen);
 				} else {
 					return iis.readASCII(maxLen);

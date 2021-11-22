@@ -1,5 +1,5 @@
 ### iso8583-es
-A ISO8583 protocol sdk with ES6 and TypeScript
+A pure, high-performance library with ES6 and typescript, used to encode and decode the ISO8583 protocol
 
 ### Usage
 ```js
@@ -9,7 +9,7 @@ npm i --save iso8583-es
 ```js
 import {
   HEX, FieldDefinition, ISOBody, ISOField, ISOInputStream, ISOOutputStream
-} from '../lib/core/index.js'
+} from 'iso8583-es'
 
 const fields = ISOField.makeFields(FieldDefinition, true); // 全局初始化一次
 
