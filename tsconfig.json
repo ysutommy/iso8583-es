@@ -6,6 +6,7 @@
 		"sourceMap": false,
 		"target": "es2015",
 		"useDefineForClassFields": false,
+		"allowSyntheticDefaultImports": true,
 		"module": "esnext",
 		"moduleResolution": "node",
 		"allowJs": false,
