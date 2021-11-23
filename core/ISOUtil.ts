@@ -100,13 +100,13 @@ export default class ISOUtil {
 		const getV = ISOUtil.getV;
 		let i = 0;
 		for (; i < slen; i++) {
+			if (i >= len) continue;
+
 			const c = getV(s.charCodeAt(i));
-			if (i < len) {
-				if ((i & 1) === 0) {
-					rs[i >> 1] |= (c << 4);
-				} else {
-					rs[i >> 1] |= c;
-				}
+			if ((i & 1) === 0) {
+				rs[i >> 1] |= (c << 4);
+			} else {
+				rs[i >> 1] |= c;
 			}
 		}
 		for (; i < rslen; i++) {

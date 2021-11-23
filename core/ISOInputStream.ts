@@ -4,29 +4,31 @@ import ISOUtil from './ISOUtil.js'
  * 输入流封装类。带 _c 的方法均表示加密
  */
 export default class ISOInputStream {
-	private bs: Uint8Array;
-	private p: number = 0;
+	// 字节流数组
+	private _bs: Uint8Array;
+	// 字节流当前索引位置
+	private _p: number = 0;
 
 	constructor(inputStream: Uint8Array) {
-		this.bs = inputStream
+		this._bs = inputStream
 	}
 
 	/**
 	 * 获取当前索引
 	 */
 	getPos(): number {
-		return this.p;
+		return this._p;
 	}
 
 	/**
 	 * 读取一个字节
 	 */
 	readByte(): number {
-		const {p, bs} = this;
-		if (p >= bs.length) {
+		const {_p, _bs} = this;
+		if (_p >= _bs.length) {
 			throw new Error("EOF");
 		}
-		return bs[this.p++] & 0xFF;
+		return _bs[this._p++] & 0xFF;
 	}
 
 	/**
@@ -37,13 +39,13 @@ export default class ISOInputStream {
 	 * @param count
 	 */
 	read(arr: Uint8Array, start: number = 0, count?: number): void {
-		const {p, bs} = this
+		const {_p, _bs} = this
 		count = (count && count > 0) ? count : arr.length;
-		if (p + count > bs.length) {
+		if (_p + count > _bs.length) {
 			throw new Error("EOF");
 		}
-		ISOUtil.arraycopy(bs, p, arr, start, count);
-		this.p += count;
+		ISOUtil.arraycopy(_bs, _p, arr, start, count);
+		this._p += count;
 	}
 
 	/**
@@ -85,10 +87,10 @@ export default class ISOInputStream {
 	 * @param len
 	 */
 	skip(len: number): void {
-		if (this.p + len > this.bs.length) {
+		if (this._p + len > this._bs.length) {
 			throw new Error("EOF");
 		}
-		this.p += len;
+		this._p += len;
 	}
 
 	/**
@@ -123,13 +125,13 @@ export default class ISOInputStream {
 	 * @param len
 	 */
 	readASCII(len: number): String {
-		const {p, bs} = this
-		if (p + len > bs.length) {
+		const {_p, _bs} = this
+		if (_p + len > _bs.length) {
 			throw new Error("EOF");
 		}
 
-		const codes = bs.slice(p, p + len);
-		this.p += len;
+		const codes = _bs.slice(_p, _p + len);
+		this._p += len;
 
 		return String.fromCharCode(...codes);
 	}

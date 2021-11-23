@@ -1,6 +1,7 @@
-import {
+import i8es from '../lib/core/index.js'
+const {
 	HEX, FieldDefinition, ISOBody, ISOField, ISOInputStream, ISOOutputStream
-} from '../lib/core/index.js'
+} = i8es
 
 const fields = ISOField.makeFields(FieldDefinition, true);
 

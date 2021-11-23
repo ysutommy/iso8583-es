@@ -61,9 +61,9 @@ export default class ISOField {
 
 		this.maxLen = parseInt(s);
 		if (this.type === 'B') {
-			this.maxLen /= 8;
+			this.maxLen >>= 3;
 			if (this.compress) {
-				this.maxLen *= 2;
+				this.maxLen <<= 1;
 			}
 		}
 	}

@@ -4,15 +4,17 @@ import ISOUtil from './ISOUtil.js'
  * 输出流封装类。带 _c 的方法均表示加密
  */
 export default class ISOOutputStream {
-	private buf: Uint8Array;
-	private len: number = 0;
+	// 字节流数组
+	private _buf: Uint8Array;
+	// 输出流字节数
+	private _size: number = 0;
 
 	constructor(src?: Uint8Array) {
 		if (src?.length) {
-			this.buf = src;
-			this.len = src.length;
+			this._buf = src;
+			this._size = src.length;
 		} else {
-			this.buf = new Uint8Array(1024);
+			this._buf = new Uint8Array(1024);
 		}
 	}
 
@@ -20,21 +22,21 @@ export default class ISOOutputStream {
 	 * 输出流字节数
 	 */
 	size(): number {
-		return this.len;
+		return this._size;
 	}
 
 	/**
 	 * 缓冲区大小
 	 */
 	bufSize(): number {
-		return this.buf.length;
+		return this._buf.length;
 	}
 
 	/**
 	 * 重置输出流
 	 */
 	reset(): void {
-		this.len = 0;
+		this._size = 0;
 	}
 
 	/**
@@ -43,8 +45,8 @@ export default class ISOOutputStream {
 	 * @param len
 	 */
 	toByteArray(start: number = 0, len?: number): Uint8Array {
-		const count = len || this.len;
-		return this.buf.slice(start, start + count);
+		const count = len || this._size;
+		return this._buf.slice(start, start + count);
 	}
 
 	/**
@@ -53,14 +55,14 @@ export default class ISOOutputStream {
 	 * @param size
 	 */
 	newSize(size: number): void {
-		let nlen = this.buf.length * 2;
+		let nlen = this._buf.length * 2;
 		if (nlen < size) {
 			nlen = size
 		}
 
-		const tempBuf = this.buf;
-		this.buf = new Uint8Array(nlen);
-		ISOUtil.arraycopy(tempBuf, 0, this.buf, 0, tempBuf.length);
+		const tempBuf = this._buf;
+		this._buf = new Uint8Array(nlen);
+		ISOUtil.arraycopy(tempBuf, 0, this._buf, 0, tempBuf.length);
 	}
 
 	/**
@@ -75,11 +77,11 @@ export default class ISOOutputStream {
 		if (start + blen > b.length) {
 			throw new Error("EOF");
 		}
-		if (this.len + blen > this.buf.length) {
-			this.newSize(this.len + blen);
+		if (this._size + blen > this._buf.length) {
+			this.newSize(this._size + blen);
 		}
-		ISOUtil.arraycopy(b, start, this.buf, this.len, blen);
-		this.len += blen
+		ISOUtil.arraycopy(b, start, this._buf, this._size, blen);
+		this._size += blen
 	}
 
 	/**
@@ -88,11 +90,11 @@ export default class ISOOutputStream {
 	 * @param b
 	 */
 	writeByte(b: number): void {
-		const { buf, len } = this;
-		if (buf.length < len + 1) {
-			this.newSize(len + 1);
+		const { _buf, _size } = this;
+		if (_buf.length < _size + 1) {
+			this.newSize(_size + 1);
 		}
-		buf[this.len++] = b & 0xFF;
+		_buf[this._size++] = b & 0xFF;
 	}
 
 	/**
@@ -187,7 +189,7 @@ export default class ISOOutputStream {
 	 * @param newData
 	 */
 	replace(pos: number, newData: Uint8Array): void {
-		ISOUtil.arraycopy(newData, 0, this.buf, pos, newData.length);
+		ISOUtil.arraycopy(newData, 0, this._buf, pos, newData.length);
 	}
 
 }

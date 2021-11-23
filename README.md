@@ -7,9 +7,10 @@ npm i --save iso8583-es
 ```
 ##### 编码
 ```js
-import {
+import i8es from 'iso8583-es'
+const {
   HEX, FieldDefinition, ISOBody, ISOField, ISOInputStream, ISOOutputStream
-} from 'iso8583-es'
+} = i8es
 
 const fields = ISOField.makeFields(FieldDefinition, true); // 全局初始化一次
 
@@ -62,3 +63,11 @@ TYPE:0200
 60:0100000100050//自定义域
 64:3030303030303030//MAC
 ```
+
+或者单独导入
+
+```js
+import ISOUtil from "iso8583-es/lib/core/ISOUtil.js";
+import ISOBody from "iso8583-es/lib/core/ISOBody.js";
+```
+

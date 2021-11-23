@@ -94,11 +94,11 @@ export default class ISOBody {
 		const ds = ISOBody.DS;
 		const len = ds.length;
 		for (let i = 0; i < len; i++) {
-			if (ds[i]) {
-				bs[i >> 3] |= (1 << (7 - (i & 7)));
-				if (i >= 64) {
-					is128 = true;
-				}
+			if (!ds[i]) continue;
+
+			bs[i >> 3] |= (1 << (7 - (i & 7)));
+			if (i >= 64) {
+				is128 = true;
 			}
 		}
 		if (is128) {
@@ -116,9 +116,9 @@ export default class ISOBody {
 		ios.write(bs);
 
 		for (let i = 1; i < len; i++) {
-			if (ds[i]) {
-				items[i + 1].encode(ds[i], ios);
-			}
+			if (!ds[i]) continue;
+
+			items[i + 1].encode(ds[i], ios);
 		}
 	}
 
@@ -131,20 +131,20 @@ export default class ISOBody {
 		let str = '';
 		str += "TYPE:" + type + "\n";
 		for (let i = 1; i < ds.length; i++) {
-			if (ds[i]) {
-				const index = i + 1;
-				const name = items[index].name;
-				let ts = ds[i];
-				if (!ISOUtil.isChars(ts)) {
-					ts = "HEX:" + HEX.byte2Hex(ISOUtil.string2byte(ts));
-				}
-				if (index === 2) {
-					str += (index + ":" + ts.substring(0, 6) + "******" + ts.substring(ts.length - 4) + "//" + name + "\n");
-				} else if (index === 35 || index === 52 || index === 53 || index === 55) {
-					str += (index + ":" + ts.substring(0, 2) + "****" + ts.substring(ts.length - 2) + "//" + name + "\n");
-				} else {
-					str += (index + ":" + ts + "//" + name + "\n");
-				}
+			if (!ds[i]) continue;
+
+			const index = i + 1;
+			const name = items[index].name;
+			let ts = ds[i];
+			if (!ISOUtil.isChars(ts)) {
+				ts = "HEX:" + HEX.byte2Hex(ISOUtil.string2byte(ts));
+			}
+			if (index === 2) {
+				str += (index + ":" + ts.substring(0, 6) + "******" + ts.substring(ts.length - 4) + "//" + name + "\n");
+			} else if (index === 35 || index === 52 || index === 53 || index === 55) {
+				str += (index + ":" + ts.substring(0, 2) + "****" + ts.substring(ts.length - 2) + "//" + name + "\n");
+			} else {
+				str += (index + ":" + ts + "//" + name + "\n");
 			}
 		}
 		return str;
