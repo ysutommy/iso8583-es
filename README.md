@@ -1,4 +1,4 @@
-### iso8583-es
+## iso8583-es
 A pure, high-performance library with ES6 and typescript, used to encode and decode the ISO8583 protocol
 
 ### Usage
