@@ -1,6 +1,6 @@
 {
   "name": "iso8583-es",
-  "version": "1.0.1-beta",
+  "version": "1.0.2",
   "author": "ysutommy",
   "description": "A ISO8583 protocol sdk with ES6 and TypeScript",
   "keywords": [
